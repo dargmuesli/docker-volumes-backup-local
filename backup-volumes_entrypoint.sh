@@ -18,6 +18,6 @@ for directory_name in $(find $BACKUP_SOURCEDIR/* -maxdepth 0 -type d -printf "%f
 	# If the directory is a named volume, i.e. no hexadecimal, 64 characters long folder name
 	if [ -z $(echo $directory_name | grep -E '[0-9a-f]{64}') ]; then
 		# rsync it to the target directory
-		rsync -avz $BACKUP_SOURCEDIR/$directory_name $BACKUP_TARGETDIR/$directory_name
+		rsync -avz $BACKUP_SOURCEDIR/$directory_name $BACKUP_TARGETDIR/
 	fi
 done
