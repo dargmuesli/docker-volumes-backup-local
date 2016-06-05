@@ -11,7 +11,7 @@ fi
 : ${SSHFS_IDENTITYFILE=rhswiwi5.nas.key}
 
 chmod 600 $BACKUP_CONFDIR/$SSHFS_IDENTITYFILE
-sshfs -o IdentityFile=$BACKUP_CONFDIR/$SSHFS_IDENTITYFILE $SSHFS_CONNECTION $BACKUP_TARGETDIR
+sshfs -o StrictHostKeyChecking=no -o IdentityFile=$BACKUP_CONFDIR/$SSHFS_IDENTITYFILE $SSHFS_CONNECTION $BACKUP_TARGETDIR
 
 # For each directory in the volume folder do:
 for directory_name in $(find $BACKUP_SOURCEDIR/* -maxdepth 0 -type d -printf "%f\n"); do
