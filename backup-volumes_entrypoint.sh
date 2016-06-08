@@ -17,6 +17,6 @@ for directory_name in $(find $BACKUP_SOURCEDIR/* -maxdepth 0 -type d -printf "%f
 	if [ -z $(echo $directory_name | grep -E '[0-9a-f]{64}') ]; then
 		# rsync it to the target directory and save permissions to a file next to it
 		rsync -avz --no-o --no-g -e "ssh -i $BACKUP_CONFDIR/$SSH_IDENTITYFILE -o StrictHostKeyChecking=no" $BACKUP_SOURCEDIR/$directory_name $BACKUP_TARGET/
-		getfacl -R $BACKUP_SOURCEDIR/$directory_name | ssh -i $BACKUP_CONFDIR/$SSH_IDENTITYFILE -o StrictHostKeyChecking=no "cat $BACKUP_TARGET/$directory_name.meta""
+		getfacl -R $BACKUP_SOURCEDIR/$directory_name | ssh -i $BACKUP_CONFDIR/$SSH_IDENTITYFILE -o StrictHostKeyChecking=no "cat $BACKUP_TARGET/$directory_name.meta"
 	fi
 done
