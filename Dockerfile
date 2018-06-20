@@ -8,7 +8,7 @@ RUN apt-get update \
  && rm -r /var/lib/apt/lists/*
 
 ADD /backup-volumes_entrypoint.sh /
-RUN chmod a+x /backup-volumes_entrypoint.sh
+RUN chmod +x /backup-volumes_entrypoint.sh
 ENTRYPOINT ["/backup-volumes_entrypoint.sh"]
 
 VOLUME ${BACKUP_CONFDIR}
