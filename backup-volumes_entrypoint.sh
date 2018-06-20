@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-LOG_FILE="/var/log/backup/backup_"$(date | sed -e 's/[.: ]/_/g')
+LOG_FILE="/var/log/backup_"$(date | sed -e 's/[.: ]/_/g')
 
 if [ -z "$BACKUP_TARGET" ]; then
   echo "BACKUP_TARGET not set."
