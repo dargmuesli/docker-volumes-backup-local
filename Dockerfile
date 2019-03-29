@@ -1,13 +1,15 @@
-FROM debian:jessie
+FROM alpine
 
-ENV BACKUP_CONFDIR="/etc/backup-volumes"
+# min hour day month weekday
+ARG CRON_EXPRESSION="0 0 * * *"
+ENV BACKUP_CONFDIR=/etc/backup-volumes/
 
-RUN apt-get update \
- && apt-get install -y openssh-client rsync \
- && rm -r /var/lib/apt/lists/*
+VOLUME $BACKUP_CONFDIR
+VOLUME /mnt/backup-target/
 
-ADD /volumes-backup_entrypoint.sh /
-RUN chmod +x /volumes-backup_entrypoint.sh
-ENTRYPOINT ["/volumes-backup_entrypoint.sh"]
+RUN apk --no-cache add rsync
 
-VOLUME ${BACKUP_CONFDIR}
+COPY /volumes-backup_entrypoint /
+RUN chmod +x /volumes-backup_entrypoint
+RUN echo "$CRON_EXPRESSION /volumes-backup_entrypoint" > /etc/crontabs/root
+CMD crond -l 2 -f
