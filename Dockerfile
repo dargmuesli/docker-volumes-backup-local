@@ -1,5 +1,4 @@
 FROM debian:jessie
-MAINTAINER Philipp Holler <philipp.holler93@googlemail.com>
 
 ENV BACKUP_CONFDIR="/etc/backup-volumes"
 
